@@ -1,0 +1,32 @@
+#######################################
+# Syntax Coloring Map For MCP47CXBXX
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MCP47CXBXX	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+isConnected	KEYWORD2
+MCP47CXBXX	KEYWORD2
+disable	KEYWORD2
+wr_VOUT_0	KEYWORD2
+wr_VOUT_1	KEYWORD2
+rd_Register	KEYWORD2
+wr_Register	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+DAC_MAX_VAL	KEYWORD3
+DAC_RW_ERROR	KEYWORD3
+DAC_RW_SUCCESS	KEYWORD3
+DAC_VAL_ERROR	KEYWORD3
+DAC_REG_ERROR	KEYWORD3
+DAC_NOT_CONNECTED	KEYWORD3
