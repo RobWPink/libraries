@@ -135,7 +135,7 @@ TEST_CASE("JsonArray::operator[]") {
 
 #ifdef HAS_VARIABLE_LENGTH_ARRAY
   SECTION("set(VLA)") {
-    size_t i = 16;
+    int i = 16;
     char vla[i];
     strcpy(vla, "world");
 
@@ -146,7 +146,7 @@ TEST_CASE("JsonArray::operator[]") {
   }
 
   SECTION("operator=(VLA)") {
-    size_t i = 16;
+    int i = 16;
     char vla[i];
     strcpy(vla, "world");
 

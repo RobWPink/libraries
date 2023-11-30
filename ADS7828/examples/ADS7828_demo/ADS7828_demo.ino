@@ -57,46 +57,53 @@
 */
 
 
-#include <Wire.h>                     // Include Wire.h for I2C functionality
-#include <ADS7828.h>                  // Include ADS7828.h for TI ADS7828 functions
+#include <Wire.h>     // Include Wire.h for I2C functionality
+#include <ADS7828.h>  // Include ADS7828.h for TI ADS7828 functions
+#define ESTOP_BREAK 40
+#define LED_PWR 22
+#define TRACO_24VDC 23
 
-ADS7828 adc(0x49);                    // Set the ADS7828 i2c address to 0x49 (A0 connected to ground, A1 connected to 5v)
+ADS7828 adc(0x4B);  // Set the ADS7828 i2c address to 0x49 (A0 connected to ground, A1 connected to 5v)
+#define A_OILTEMP A5
+#define A_COOLANTTEMP A4
+#define A_DISCHARGETEMP A3
+#define A_ecuTEMP A2
 
-
-void setup()
-{
-  Serial.begin(9600);                 // Start Serial 
-  Serial.println("Sketch begin");     // Print begin message
-  adc.init();                         // Initialize ADC in external reference mode and initialize the i2c bus
+void setup() {
+  Serial.begin(9600);              // Start Serial
+  Serial.println("Sketch begin");  // Print begin message
+  adc.init();
+  pinMode(TRACO_24VDC, OUTPUT);
+  digitalWrite(TRACO_24VDC, HIGH);  // Initialize ADC in external reference mode and initialize the i2c bus
 }
 
-void loop()
-{
-  
-  unsigned int read_value = 0;        // Sets/reset the variable for reading DAC to 0
-  unsigned int vref = 4095;           // Sets vref value for calculations (set to 2500 for internal reference)
-  float voltage = 0;                  // Sets/reset the variable for voltage caltulations to 0
-  
-  for(int x = 0; x < 8; x++){                     // Loops from 0 to 7
-    
-    read_value = adc.read(x, SD);                 // Read value of ADC channel x (0 to 7) in Single-ended mode
-    voltage = read_value * (vref / 4095.0);       // Calculate voltage output value according to the voltage reference and resolution
-    
-    Serial.print("Channel ");                 // Prints...
-    Serial.print(x);                          // Prints channel number
-    Serial.print(": ");                       // Prints...
-    Serial.print(read_value);                 // Prints value read from ADC
-    Serial.print(" (");                       // Prints...
-    Serial.print(voltage,0);                  // Prints value of DAC output voltage on channel 0 to serial monitor
-    Serial.println(" mV)");                   // Prints...
+void loop() {
+
+  unsigned int read_value = 0;  // Sets/reset the variable for reading DAC to 0
+  unsigned int vref = 1023;     // Sets vref value for calculations (set to 2500 for internal reference)
+  float voltage = 0;            // Sets/reset the variable for voltage caltulations to 0
+  Serial.println("sf");
+  float suctionP = 0;
+
+  Serial.println();
+  delay(1000);
+  Serial.println("df");
+  for (int x = 0; x < 8; x++) {  // Loops from 0 to 7
+
+    read_value = adc.read(x, SD);            // Read value of ADC channel x (0 to 7) in Single-ended mode
+    voltage = read_value * (vref / 4095.0);  // Calculate voltage output value according to the voltage reference and resolution
+    suctionP = (read_value - 200.0) / 1.696;
+    Serial.print("Channel ");   // Prints...
+    Serial.print(x);            // Prints channel number
+    Serial.print(": ");         // Prints...
+    Serial.print(read_value);   // Prints value read from ADC
+    Serial.print(" (");         // Prints...
+    //Serial.print(voltage, 0);   // Prints value of DAC output voltage on channel 0 to serial monitor
+    //Serial.print(" mV)");       // Prints...
+    Serial.print(suctionP, 0);  // Prints value of DAC output voltage on channel 0 to serial monitor
+    Serial.println(" Psi");
   }
-  
-  Serial.println();                      // Prints blank line
-  read_value = adc.read(0, DF);          // read channel 0 in differential mode (Chan 0 +, Chan 1 -)
-  Serial.println(read_value);            // Prints value read from ADC
-  Serial.println();                      // Prints blank line
-  delay(1000);                           // Wait for 1 second
+
+  Serial.println(analogRead(A_COOLANTTEMP));
+  delay(1000);  // Wait for 1 second
 }
-
-
-

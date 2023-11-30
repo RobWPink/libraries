@@ -71,7 +71,7 @@ TEST_CASE("JsonVariant::set() when there is enough memory") {
 
 #ifdef HAS_VARIABLE_LENGTH_ARRAY
   SECTION("VLA") {
-    size_t n = 16;
+    int n = 16;
     char str[n];
 
     strcpy(str, "hello");
@@ -98,7 +98,7 @@ TEST_CASE("JsonVariant::set() when there is enough memory") {
     char str[16];
 
     strcpy(str, "hello");
-    bool result = variant.set(JsonString(str, JsonString::Linked));
+    bool result = variant.set(JsonString(str, true));
     strcpy(str, "world");
 
     REQUIRE(result == true);
@@ -109,7 +109,7 @@ TEST_CASE("JsonVariant::set() when there is enough memory") {
     char str[16];
 
     strcpy(str, "hello");
-    bool result = variant.set(JsonString(str, JsonString::Copied));
+    bool result = variant.set(JsonString(str, false));
     strcpy(str, "world");
 
     REQUIRE(result == true);

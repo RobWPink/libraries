@@ -1,2 +1,0 @@
-# libraries
-arduino library folder

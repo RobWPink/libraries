@@ -48,7 +48,7 @@ void SmallMatrix::displayChar(char c, bool invert)
 {
   uint16_t inv = (uint16_t)invert;
   matrix.setRotation(0);
-	matrix.clear();
+  matrix.clear();
  if(invert){matrix.fillRect(0,0, 8,8, LED_ON);}
   switch(c){
   case 'L':
@@ -66,9 +66,32 @@ void SmallMatrix::displayChar(char c, bool invert)
     matrix.drawLine(4,1,4,4,!inv);
     matrix.drawLine(0,4,7,4,!inv);
     break;
+  case 'P':
+matrix.drawLine(0,6,7,6,!inv);
+matrix.drawLine(0,6,0,3,!inv);
+matrix.drawLine(0,3,3,3,!inv);
+matrix.drawLine(4,3,4,6,!inv);
+
+
+        break;
+  case 'S':
+    matrix.drawLine(0,6,0,3,!inv);
+    matrix.drawLine(0,6,3,6,!inv);
+
+    matrix.drawLine(3,3,7,3,!inv);
+    matrix.drawLine(3,3,3,6,!inv);
+
+    matrix.drawLine(7,6,7,3,!inv);
+        break;
+  case 'I':
+    matrix.drawLine(7,1,7,5,!inv);
+    matrix.drawLine(0,1,0,5,!inv);
+    matrix.drawLine(0,3,7,3,!inv);
+    break;
+
   case '1':
     matrix.drawLine(7,1,7,5,!inv);
-    matrix.drawLine(7,3,0,3,!inv);
+    matrix.drawLine(7,4,0,4,!inv);
     matrix.drawLine(0,3,2,5,!inv);
     break;
   case '2':
@@ -89,91 +112,45 @@ void SmallMatrix::displayChar(char c, bool invert)
     matrix.drawLine(4,1,4,4,!inv);
     matrix.drawLine(4,4,1,4,!inv);
     break;
-  case '5':
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    break;
-  case '6':
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(7,5,4,5,!inv);
-    break;
-  case '7':
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(1,1,7,1,!inv);
-    break;
-  case '8':
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(7,5,4,5,!inv);
-    matrix.drawLine(1,1,4,1,!inv);
-    break;
-  case '9':
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(1,1,4,1,!inv);
-    break;
-/*  case "10":
-    matrix.drawLine(1,1,1,7,!inv);
-    matrix.drawLine(1,7,7,4,!inv);
-    matrix.drawLine(7,4,1,4,!inv);
-    matrix.drawLine(1,4,1,1,!inv);
-    matrix.drawLine(1,6,7,6,!inv);
-    break;
-  case "11":
-    matrix.drawLine(1,5,7,5,!inv);
-    matrix.drawLine(1,3,7,3,!inv);
-
-    break;
-  case "12":
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(1,1,4,1,!inv);
-    break;
-  case "13":
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(1,1,4,1,!inv);
-    break;
-  case "14":
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(1,1,4,1,!inv);
-    break;
-  case "15":
-    matrix.drawLine(7,5,7,1,!inv);
-    matrix.drawLine(7,1,4,1,!inv);
-    matrix.drawLine(4,1,4,5,!inv);
-    matrix.drawLine(4,5,1,5,!inv);
-    matrix.drawLine(1,5,1,1,!inv);
-    matrix.drawLine(1,1,4,1,!inv);
-    break;*/
   default:
     break;
   }
   matrix.setBrightness(15);
 	matrix.writeDisplay();
+		
+}
+
+void SmallMatrix::halfMatrix(char c)
+{
+	matrix.setRotation(0);
+	switch(c){
+	case 't' :
+	  matrix.fillRect(0,0, 4,8, LED_ON);
+	  matrix.fillRect(4,0, 8,8, LED_OFF);
+	  break;
+	
+	case 'b' :
+	  matrix.fillRect(0,0, 4,8, LED_OFF);
+	  matrix.fillRect(4,0, 8,8, LED_ON);
+	  break;
+	
+	default:
+	  break;
+	}
+	matrix.setBrightness(HIGH);
+	matrix.writeDisplay();
+}
+void SmallMatrix::WaterDropDisplay()
+{
+	matrix.clear();
+	matrix.fillCircle(3,3, 3, LED_ON);
+	matrix.drawLine(0,3,3,0,LED_ON);
+	matrix.drawLine(4,0,6,3,LED_ON);
+	matrix.drawLine(0,2,2,0,LED_OFF);
+
+	matrix.drawLine(0,2,2,0,LED_OFF);
+	matrix.drawLine(7,3,5,5,LED_ON);
+ 	matrix.writeDisplay();
 }
 bool SmallMatrix::posDisplay(int pos)
 {

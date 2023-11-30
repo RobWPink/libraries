@@ -19,18 +19,6 @@
 
 #include "RS485.h"
 
-#ifdef __MBED__
-#include "pinDefinitions.h"
-RS485Class::RS485Class(HardwareSerial& hwSerial, PinName txPin, PinName dePin, PinName rePin) :
-  _serial(&hwSerial),
-  _txPin(PinNameToIndex(txPin)),
-  _dePin(PinNameToIndex(dePin)),
-  _rePin(PinNameToIndex(rePin)),
-  _transmisionBegun(false)
-{
-}
-#endif
-
 RS485Class::RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin) :
   _serial(&hwSerial),
   _txPin(txPin),
@@ -76,25 +64,20 @@ void RS485Class::begin(unsigned long baudrate, uint16_t config, int predelay, in
 
   _transmisionBegun = false;
 
-#if defined(ARDUINO_OPTA)
-  auto _opta_uart = static_cast<UART *>(_serial);
-  _opta_uart->begin(baudrate, config, true);
-#else
   _serial->begin(baudrate, config);
-#endif 
 }
 
 void RS485Class::end()
 {
   _serial->end();
 
-  if (_dePin > -1) {
-    digitalWrite(_dePin, LOW);
+  if (_rePin > -1) {
+    digitalWrite(_rePin, LOW);
     pinMode(_dePin, INPUT);
   }
   
-  if (_rePin > -1) {
-    digitalWrite(_rePin, LOW);
+  if (_dePin > -1) {
+    digitalWrite(_dePin, LOW);
     pinMode(_rePin, INPUT);
   }
 }
@@ -203,8 +186,4 @@ void RS485Class::setDelays(int predelay, int postdelay)
   _postdelay = postdelay;
 }
 
-#ifdef RS485_SERIAL_PORT
-RS485Class RS485(RS485_SERIAL_PORT, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
-#else
 RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
-#endif

@@ -90,14 +90,14 @@ Otherwise IP addresses only must be used
 */
 //#define MODBUS_IP_USE_DNS
 
-//#define MODBUSRTU_DEBUG
+#define MODBUSRTU_DEBUG
 #define MODBUSRTU_BROADCAST 0
 #define MB_RESERVE 248
 #define MB_SERIAL_BUFFER 128
 #define MODBUSRTU_TIMEOUT 200
 #define MODBUSRTU_MAX_READMS 100
 /*
-#define MODBUSRTU_REDE
+//#define MODBUSRTU_REDE
 Enable using separate pins for RE DE
 */
 //#define MODBUSRTU_REDE

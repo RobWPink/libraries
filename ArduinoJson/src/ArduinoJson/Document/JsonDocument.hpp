@@ -14,8 +14,7 @@
 
 namespace ARDUINOJSON_NAMESPACE {
 
-class JsonDocument : public Visitable,
-                     public VariantOperators<const JsonDocument&> {
+class JsonDocument : public Visitable {
  public:
   template <typename TVisitor>
   typename TVisitor::result_type accept(TVisitor& visitor) const {
@@ -296,12 +295,16 @@ class JsonDocument : public Visitable,
     _data.remove(adaptString(key));
   }
 
-  FORCE_INLINE operator VariantRef() {
-    return getVariant();
+  FORCE_INLINE operator VariantConstRef() const {
+    return VariantConstRef(&_data);
   }
 
-  FORCE_INLINE operator VariantConstRef() const {
-    return getVariant();
+  bool operator==(VariantConstRef rhs) const {
+    return getVariant() == rhs;
+  }
+
+  bool operator!=(VariantConstRef rhs) const {
+    return getVariant() != rhs;
   }
 
  protected:

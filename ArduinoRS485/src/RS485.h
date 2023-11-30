@@ -22,28 +22,18 @@
 
 #include <Arduino.h>
 
-#ifndef RS485_DEFAULT_TX_PIN
 #ifdef PIN_SERIAL1_TX
 #define RS485_DEFAULT_TX_PIN PIN_SERIAL1_TX
 #else
 #define RS485_DEFAULT_TX_PIN 1 
 #endif
-#endif
 
 #ifdef __AVR__
 #define RS485_DEFAULT_DE_PIN 2
 #define RS485_DEFAULT_RE_PIN -1
-#elif ARDUINO_NANO_RP2040_CONNECT
-#define RS485_DEFAULT_DE_PIN A1
-#define RS485_DEFAULT_RE_PIN A0
-#elif ARDUINO_SAMD_ZERO
-#define RS485_DEFAULT_DE_PIN A4
-#define RS485_DEFAULT_RE_PIN A5
 #else
-#ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
 #define RS485_DEFAULT_RE_PIN A5
-#endif
 #endif
 
 
@@ -52,9 +42,6 @@
 
 class RS485Class : public Stream {
   public:
-#ifdef __MBED__
-    RS485Class(HardwareSerial& hwSerial, PinName txPin, PinName dePin, PinName rePin);
-#endif
     RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
 
     virtual void begin(unsigned long baudrate);
