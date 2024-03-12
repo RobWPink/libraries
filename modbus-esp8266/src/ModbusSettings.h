@@ -90,7 +90,7 @@ Otherwise IP addresses only must be used
 */
 //#define MODBUS_IP_USE_DNS
 
-#define MODBUSRTU_DEBUG
+//#define MODBUSRTU_DEBUG
 #define MODBUSRTU_BROADCAST 0
 #define MB_RESERVE 248
 #define MB_SERIAL_BUFFER 128
