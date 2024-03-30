@@ -44,6 +44,93 @@ void SmallMatrix::squareDisplay(int brightness)
 	}
 }
 
+void SmallMatrix::displayPlay(bool invert)
+{
+  uint16_t inv = (uint16_t)invert;
+  matrix.setRotation(0);
+	matrix.clear();
+  if(invert){matrix.fillRect(0,0, 8,8, LED_ON);}
+  matrix.drawLine(0,5,6,5,!inv);
+  matrix.drawLine(1,4,5,4,!inv);
+  matrix.drawLine(2,3,4,3,!inv);
+  matrix.drawPixel(3,2,!inv);
+
+  matrix.setBrightness(15);
+	matrix.writeDisplay();
+}
+
+void SmallMatrix::displayPause(bool invert)
+{
+  uint16_t inv = (uint16_t)invert;
+  matrix.setRotation(0);
+	matrix.clear();
+  if(invert){matrix.fillRect(0,0, 8,8, LED_ON);}
+  matrix.drawLine(0,1,6,1,!inv);
+  matrix.drawLine(0,2,6,2,!inv);
+  matrix.drawLine(0,5,6,5,!inv);
+  matrix.drawLine(0,6,6,6,!inv);
+
+  matrix.setBrightness(15);
+	matrix.writeDisplay();
+}
+
+void SmallMatrix::displayStop(bool invert)
+{
+  uint16_t inv = (uint16_t)invert;
+  matrix.setRotation(0);
+	matrix.clear();
+  if(invert){matrix.fillRect(0,0, 8,8, LED_ON);}
+  matrix.drawLine(0,0,7,7,!inv);
+  matrix.drawLine(0,7,7,0,!inv);
+  matrix.drawLine(0,1,6,7,!inv);
+  matrix.drawLine(1,0,7,6,!inv);
+  matrix.drawLine(0,6,6,0,!inv);
+  matrix.drawLine(1,7,7,1,!inv);
+
+  matrix.setBrightness(15);
+	matrix.writeDisplay();
+}
+
+void SmallMatrix::halfMatrix(char c)
+{
+  matrix.setRotation(0);
+	matrix.clear();
+	switch(c){
+	case 'A' :
+	  matrix.fillRect(0,0, 4,8, LED_ON);
+	  matrix.fillRect(4,0, 8,8, LED_OFF);
+	  break;
+	
+	case 'B' :
+	  matrix.fillRect(0,0, 4,8, LED_OFF);
+	  matrix.fillRect(4,0, 8,8, LED_ON);
+	  break;
+	
+	default:
+	  break;
+	}
+  matrix.setBrightness(15);
+	matrix.writeDisplay();
+}
+
+void SmallMatrix::WaterDropDisplay(bool invert)
+{
+	uint16_t inv = (uint16_t)invert;
+  matrix.setRotation(0);
+	matrix.clear();
+  if(invert){matrix.fillRect(0,0, 8,8, LED_ON);}
+	matrix.fillCircle(3,3, 3, !inv);
+	matrix.drawLine(0,3,3,0,!inv);
+	matrix.drawLine(4,0,6,3,!inv);
+	matrix.drawLine(0,2,2,0,!inv);
+
+	matrix.drawLine(0,2,2,0,!inv);
+	matrix.drawLine(7,3,5,5,!inv);
+  
+ 	matrix.setBrightness(15);
+	matrix.writeDisplay();
+}
+
 void SmallMatrix::displayChar(char c, bool invert)
 {
   uint16_t inv = (uint16_t)invert;
