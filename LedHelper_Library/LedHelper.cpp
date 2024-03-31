@@ -91,24 +91,13 @@ void SmallMatrix::displayStop(bool invert)
 	matrix.writeDisplay();
 }
 
-void SmallMatrix::halfMatrix(char c)
+void SmallMatrix::halfMatrix(bool a, bool b)
 {
   matrix.setRotation(0);
 	matrix.clear();
-	switch(c){
-	case 'A' :
-	  matrix.fillRect(0,0, 4,8, LED_ON);
-	  matrix.fillRect(4,0, 8,8, LED_OFF);
-	  break;
-	
-	case 'B' :
-	  matrix.fillRect(0,0, 4,8, LED_OFF);
-	  matrix.fillRect(4,0, 8,8, LED_ON);
-	  break;
-	
-	default:
-	  break;
-	}
+	matrix.fillRect(0,0, 4,8, a?LED_ON:LED_OFF);
+	matrix.fillRect(4,0, 8,8, b?LED_ON:LED_OFF);
+
   matrix.setBrightness(15);
 	matrix.writeDisplay();
 }
