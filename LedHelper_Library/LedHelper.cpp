@@ -91,12 +91,25 @@ void SmallMatrix::displayStop(bool invert)
 	matrix.writeDisplay();
 }
 
+void SmallMatrix::displayQuadrants(bool a, bool b, bool c, bool d)
+{
+  matrix.setRotation(0);
+	matrix.clear();
+	matrix.fillRect(3,4, 0,7, a?LED_ON:LED_OFF);
+	matrix.fillRect(4,4, 7,7, b?LED_ON:LED_OFF);
+  matrix.fillRect(0,0, 3,3, c?LED_ON:LED_OFF);
+	matrix.fillRect(0,7, 4,3, d?LED_ON:LED_OFF);
+
+  matrix.setBrightness(15);
+	matrix.writeDisplay();
+}
+
 void SmallMatrix::halfMatrix(bool a, bool b)
 {
   matrix.setRotation(0);
 	matrix.clear();
-	matrix.fillRect(0,0, 4,8, a?LED_ON:LED_OFF);
-	matrix.fillRect(4,0, 8,8, b?LED_ON:LED_OFF);
+	matrix.fillRect(0,0, 8,4, a?LED_ON:LED_OFF);
+	matrix.fillRect(0,4, 8,8, b?LED_ON:LED_OFF);
 
   matrix.setBrightness(15);
 	matrix.writeDisplay();
@@ -127,6 +140,17 @@ void SmallMatrix::displayChar(char c, bool invert)
 	matrix.clear();
  if(invert){matrix.fillRect(0,0, 8,8, LED_ON);}
   switch(c){
+    
+  case 'D':
+    matrix.drawLine(1,5,6,5,!inv);
+    matrix.drawLine(1,3,1,4,!inv);
+    matrix.drawLine(6,3,6,4,!inv);
+    matrix.drawLine(2,2,5,2,!inv);
+    break;
+  case 'T':
+    matrix.drawLine(1,1,1,5,!inv);
+    matrix.drawLine(1,3,6,3,!inv);
+    break;
   case 'L':
     matrix.drawLine(0,4,7,4,!inv);
     matrix.drawLine(7,8,7,1,!inv);
