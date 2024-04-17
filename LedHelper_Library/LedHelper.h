@@ -24,7 +24,14 @@ class SmallMatrix
 		
 		bool posDisplay(int pos);
 		void squareDisplay(int brightness);
-    void displayChar(char c, bool invert);
+		void displayPlay(bool invert);
+		void displayPause(bool invert);
+		void displayStop(bool invert);
+		void displayQuadrants(bool a, bool b, bool c, bool d);
+		void halfMatrix(bool a, bool b);
+		void WaterDropDisplay(bool invert);
+    	void displayChar(char c, bool invert);
+		
 		
 		~SmallMatrix() {};
 		
