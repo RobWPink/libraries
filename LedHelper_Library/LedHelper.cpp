@@ -152,8 +152,8 @@ void SmallMatrix::displayChar(char c, bool invert)
     matrix.drawLine(1,3,6,3,!inv);
     break;
   case 'L':
-    matrix.drawLine(0,4,7,4,!inv);
-    matrix.drawLine(7,8,7,1,!inv);
+    matrix.drawLine(1,5,7,5,!inv);
+    matrix.drawLine(7,2,7,5,!inv);
     break;
   case 'M':
     matrix.drawLine(0,0,7,0,!inv);
@@ -162,9 +162,9 @@ void SmallMatrix::displayChar(char c, bool invert)
     matrix.drawLine(0,6,7,6,!inv);
     break;
   case 'H':
-    matrix.drawLine(0,1,7,1,!inv);
-    matrix.drawLine(4,1,4,4,!inv);
-    matrix.drawLine(0,4,7,4,!inv);
+    matrix.drawLine(1,2,7,2,!inv);
+    matrix.drawLine(4,2,4,5,!inv);
+    matrix.drawLine(1,5,7,5,!inv);
     break;
   case '1':
     matrix.drawLine(7,1,7,5,!inv);
