@@ -59,6 +59,20 @@ void SmallMatrix::displayPlay(bool invert)
 	matrix.writeDisplay();
 }
 
+void SmallMatrix::displayHollowPlay(bool invert)
+{
+  uint16_t inv = (uint16_t)invert;
+  matrix.setRotation(0);
+	matrix.clear();
+  if(invert){matrix.fillRect(0,0, 8,8, LED_ON);}
+  matrix.drawLine(0,5,6,5,!inv);
+	matrix.drawLine(3,2,0,5,!inv);
+  matrix.drawLine(3,2,6,5,!inv);
+
+  matrix.setBrightness(15);
+	matrix.writeDisplay();
+}
+
 void SmallMatrix::displayPause(bool invert)
 {
   uint16_t inv = (uint16_t)invert;
