@@ -105,14 +105,28 @@ void SmallMatrix::displayStop(bool invert)
 	matrix.writeDisplay();
 }
 
-void SmallMatrix::displayQuadrants(bool a, bool b, bool c, bool d)
+void SmallMatrix::displayQuadrants(bool a, bool b, bool c, bool d, bool p1, bool p2)
 {
 	matrix.setRotation(0);
 	matrix.clear();
-	matrix.fillRect(0,4, 4,7, a?LED_ON:LED_OFF);
-	matrix.fillRect(4,4, 7,7, b?LED_ON:LED_OFF);
-	matrix.fillRect(0,0, 4,4, c?LED_ON:LED_OFF);
-	matrix.fillRect(4,0, 7,4, d?LED_ON:LED_OFF);
+	if(p1){
+		matrix.drawline(2,7, 5,7);
+		matrix.drawline(2,5, 5,5);
+	}
+	else{
+		matrix.fillRect(0,4, 4,7, a?LED_ON:LED_OFF);
+		matrix.fillRect(4,4, 7,7, b?LED_ON:LED_OFF);
+	}
+
+	if(p2){
+		matrix.drawline(2,0, 5,0);
+		matrix.drawline(2,2, 5,2);
+	}
+	else{
+		matrix.fillRect(0,0, 4,4, c?LED_ON:LED_OFF);
+		matrix.fillRect(4,0, 7,4, d?LED_ON:LED_OFF);
+	}
+	
 	matrix.setBrightness(15);
 	matrix.writeDisplay();
 }

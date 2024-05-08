@@ -28,7 +28,7 @@ class SmallMatrix
 		void displayHollowPlay(bool invert);
 		void displayPause(bool invert);
 		void displayStop(bool invert);
-		void displayQuadrants(bool a, bool b, bool c, bool d);
+		void displayQuadrants(bool a, bool b, bool c, bool d, bool p1, bool p2);
 		void halfMatrix(bool a, bool b);
 		void WaterDropDisplay(bool invert);
     	void displayChar(char c, bool invert);
