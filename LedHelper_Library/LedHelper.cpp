@@ -110,8 +110,8 @@ void SmallMatrix::displayQuadrants(bool a, bool b, bool c, bool d, bool p1, bool
 	matrix.setRotation(0);
 	matrix.clear();
 	if(p1){
-		matrix.drawLine(2,7, 5,7,false);
-		matrix.drawLine(2,5, 5,5,false);
+		matrix.drawLine(2,7, 5,7,LED_ON);
+		matrix.drawLine(2,5, 5,5,LED_ON);
 	}
 	else{
 		matrix.fillRect(0,4, 4,7, a?LED_ON:LED_OFF);
@@ -119,8 +119,8 @@ void SmallMatrix::displayQuadrants(bool a, bool b, bool c, bool d, bool p1, bool
 	}
 
 	if(p2){
-		matrix.drawLine(2,0, 5,0,false);
-		matrix.drawLine(2,2, 5,2,false);
+		matrix.drawLine(2,0, 5,0,LED_ON);
+		matrix.drawLine(2,2, 5,2,LED_ON);
 	}
 	else{
 		matrix.fillRect(0,0, 4,4, c?LED_ON:LED_OFF);
