@@ -22,7 +22,7 @@
 #include <Adafruit_I2CDevice.h>
 #include <Wire.h>
 
-#define MCP4728_I2CADDR_DEFAULT 0x61 ///< MCP4728 default i2c address
+#define MCP4728_I2CADDR_DEFAULT 0x60 ///< MCP4728 default i2c address
 
 #define MCP4728_MULTI_IR_CMD                                                   \
   0x40 ///< Command to write to the input register only
@@ -87,8 +87,8 @@ typedef enum channel {
 class Adafruit_MCP4728 {
 public:
   Adafruit_MCP4728();
-  bool begin(uint8_t i2c_address = MCP4728_I2CADDR_DEFAULT,
-             TwoWire *wire = &Wire);
+  boolean begin(uint8_t i2c_address = MCP4728_I2CADDR_DEFAULT,
+             TwoWire *theWire = &Wire1);
 
   bool setChannelValue(MCP4728_channel_t channel, uint16_t new_value,
                        MCP4728_vref_t new_vref = MCP4728_VREF_VDD,
