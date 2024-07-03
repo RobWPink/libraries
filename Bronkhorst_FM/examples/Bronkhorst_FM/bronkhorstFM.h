@@ -28,6 +28,7 @@ public:
 	void wr_flowunit_kg_h(void);
   int rd_controlmode(void);
   int rd_setpoint(void);
+  int rd_sensor(void);
   int rd_measure(void);
   float rd_fmeasure(void);
   float rd_temp(void);

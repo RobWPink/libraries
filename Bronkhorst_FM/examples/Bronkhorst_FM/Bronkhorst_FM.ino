@@ -9,12 +9,12 @@
  */
 
 #include <Arduino.h>
-#include <bronkhorstFM.h>
+#include "bronkhorstFM.h"
 
 // Power Supply Enable Pin
 #define TRACO_24VDC 23
 
-Bronkhorst_FM flow_meter(Serial1);
+Bronkhorst_FM flow_meter(Serial3);
 int count = 0;
 int measure = 0;
 float fmeasure = 0;
@@ -33,8 +33,8 @@ void setup()
   digitalWrite(TRACO_24VDC, HIGH);
   
   // Start Serial ports
-  Serial.begin(115200); // to terminal
-  Serial1.begin(38400, SERIAL_8N1); // to flow meter
+  Serial.begin(9600); // to terminal
+  Serial3.begin(38400, SERIAL_8N1); // to flow meter
 
   while (current_mode != RS232)
   {
@@ -56,6 +56,11 @@ void loop()
   
   if (current_mode == RS232)
   {
+    //flow_meter.wr_flowunit_kg_h();
+    // Serial.print("sensor ");
+    // Serial.print(flow_meter.rd_sensor());
+    Serial3.print(":058001010E32\n\r");
+
     flow_meter.wr_setpoint(target_setpoint);
     setpoint = flow_meter.rd_setpoint();
     Serial.print(" Setpoint: ");

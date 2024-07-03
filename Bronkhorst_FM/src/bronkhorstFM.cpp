@@ -8,11 +8,11 @@
  *last modified 06/24 by Sandeep
  */
 
-#include "bronkhorstFM.h"
+#include <bronkhorstFM.h>
 
 // Commands
-#define WR_FLOWUNIT     ":058001010E32\n\r"
-#define RD_FLOWUNIT     ":0780040100000E\n\r"
+#define WR_FLOWUNIT     ":0780000100000F32\n\r"
+#define RD_FLOWUNIT     ":0680000100000F\n\r"
 #define RD_SETPOINT     ":06800401210121\r\n"
 #define RD_MEASURE      ":06800401210120\r\n"
 #define RD_CONTROL_MODE ":06800401040104\r\n"
@@ -62,20 +62,6 @@ int Bronkhorst_FM::rd_setpoint(void)
     }    
 
     return setpoint;
-};
-
-int Bronkhorst_FM::rd_sensor(void)
-{
-    static int measure = 0;    
-
-    _s->print(RD_FLOWUNIT);
-    receiveFMPacket();
-    if ((measure != fm_param._measure) && fm_param.rd_stpnt_flg != 1)
-    {
-        measure = fm_param._measure;
-    }
-
-    return measure;
 };
 
 int Bronkhorst_FM::rd_measure(void)
